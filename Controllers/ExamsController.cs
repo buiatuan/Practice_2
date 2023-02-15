@@ -11,7 +11,7 @@ using Practice_2.Data;
 
 namespace Practice_2.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "add")]
     public class ExamsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -76,6 +76,7 @@ namespace Practice_2.Controllers
         }
 
         // GET: Exams/Edit/5
+        [Authorize(Policy = "addmin")
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null || _context.Exams == null)
@@ -98,6 +99,7 @@ namespace Practice_2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "addmin")
         public async Task<IActionResult> Edit(long id, [Bind("ExamId,Score,StudentId,SubjectId")] Exam exam)
         {
             if (id != exam.ExamId)
@@ -131,6 +133,7 @@ namespace Practice_2.Controllers
         }
 
         // GET: Exams/Delete/5
+        [Authorize(Policy = "addmin")
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null || _context.Exams == null)
@@ -153,6 +156,7 @@ namespace Practice_2.Controllers
         // POST: Exams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "addmin")
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
             if (_context.Exams == null)

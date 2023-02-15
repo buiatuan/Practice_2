@@ -11,7 +11,7 @@ using Practice_2.Data;
 
 namespace Practice_2.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "add")]
     public class StudentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -29,6 +29,7 @@ namespace Practice_2.Controllers
         }
 
         // GET: Students/Details/5
+        [Authorize(Policy = "addmin")]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null || _context.Students == null)

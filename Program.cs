@@ -14,9 +14,18 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-services.AddAuthorization(options => {
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("admin", policy =>
+        policy.RequireUserName("admin@mvc.web")
+                .RequireAuthenticatedUser());
 
-    options.AddPolicy("PolicyName", policy => policy.Requirements.Add(new Requirement()));
+    options.AddPolicy("add", policy =>
+        policy.RequireUserName("add@mvc.web")
+                .RequireUserName("admin@mvc.web")
+                .RequireAuthenticatedUser());
+
+
 });
 
 var app = builder.Build();
