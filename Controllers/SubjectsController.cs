@@ -69,7 +69,7 @@ namespace Practice_2.Controllers
         }
 
         // GET: Subjects/Edit/5
-        [Authorize(Policy = "addmin")
+        [Authorize(Policy = "addmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Subjects == null)
@@ -90,7 +90,7 @@ namespace Practice_2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "addmin")
+        [Authorize(Policy = "addmin")]
         public async Task<IActionResult> Edit(int id, [Bind("SubjectId,SubjectName,SubjectCode,SubjectDescription,StartDate,EndDate")] Subject subject)
         {
             if (id != subject.SubjectId)
@@ -122,7 +122,7 @@ namespace Practice_2.Controllers
         }
 
         // GET: Subjects/Delete/5
-        [Authorize(Policy = "addmin")
+        [Authorize(Policy = "addmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Subjects == null)
@@ -143,7 +143,7 @@ namespace Practice_2.Controllers
         // POST: Subjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "addmin")
+        [Authorize(Policy = "addmin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Subjects == null)
